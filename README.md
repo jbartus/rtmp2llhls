@@ -16,29 +16,24 @@ A demonstration of using OBS Studio, OvenMediaEngine, Fastly and hls.js to deliv
 you should be able to arrange OBS and your browser side by side on your screen and observe the latency to be 3 - 5 seconds
 
 ## OBS Config
-- Settings
-  - Stream
-    - Service: Custom
-    - Server: $paste_terraform_output_here
-    - Stream Key: stream
-  - Output
-    - Output Mode: Advanced
-    - Streaming 
-      - Encoder Settings
-        - Rate Control: CBR
-        - Bitrate: 3000 Kbps
-        - Keyframe Interval: 1s
-        - CPU Usage Preset: ultrafast
-        - Profile: baseline
-        - Tune: zerolatency
-  - Video
-    - Base (Canvas) Resolution: 1920x1080
-    - Output (Scaled) Resolution: 1920x1080
-    - Common FPS Values: 30
+
 - Sources
-  - Add (+) 
-    - Browser 
+  - Add (+)
+    - Browser
       - OK
         - URL: https://time.gov
         - Width: 1920
         - Height: 1024
+
+- Settings
+  - Stream
+    - Service: Custom
+    - Server: $paste_terraform_output
+    - Stream Key: stream
+  - Output
+    - Streaming 
+      - Video Bitrate: 5000 Kbps
+  - Video
+    - Base (Canvas) Resolution: 1920x1080
+    - Output (Scaled) Resolution: 1920x1080
+    - Common FPS Values: 30
