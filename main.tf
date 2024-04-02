@@ -62,9 +62,15 @@ resource "fastly_service_vcl" "llhls" {
   }
 
   snippet {
-    name    = "smiss"
+    name    = "fetch"
     type    = "fetch"
-    content = "set beresp.do_stream = true;"
+    content = file("fetch.vcl")
+  }
+
+  snippet {
+    name    = "deliver"
+    type    = "deliver"
+    content = file("deliver.vcl")
   }
 
   force_destroy = true
