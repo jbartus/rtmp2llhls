@@ -26,7 +26,7 @@ resource "google_compute_instance" "ome" {
 
   metadata = {
     ssh-keys  = "ubuntu:${file("${var.ssh_pub_key}")}"
-    user-data = file("ome.conf")
+    user-data = file("user-data.yaml")
   }
 }
 

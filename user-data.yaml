@@ -1,5 +1,6 @@
 #cloud-config
+packages:
+  - docker.io
+
 runcmd:
-  - curl -fsSL https://get.docker.com | sh
-  - docker pull airensoft/ovenmediaengine
   - docker run -d -p 1935:1935 -p 3333:3333 airensoft/ovenmediaengine
