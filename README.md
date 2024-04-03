@@ -2,6 +2,12 @@
 
 A demonstration of using OBS Studio, OvenMediaEngine, Fastly and hls.js to deliver a low-latency HLS stream.
 
+```mermaid
+graph LR
+  hlsjs-.http.->fastly-.http.->ome
+  obs-.rtmp.->ome
+```
+
 ## Howto
 - clone this repo and `cd` into the directory
 - `terraform init`
