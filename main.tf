@@ -1,17 +1,8 @@
-# generate a two hex character random suffix to avoid namespace collisions
-resource "random_id" "rid" {
-  byte_length = 1
-}
-
-locals {
-  suffix = random_id.rid.hex
-}
-
 # launch a VM on GCP that runs OME as a container
 resource "google_compute_instance" "ome" {
-  name         = "ome-${local.suffix}"
+  name         = "ome-${local.rid}"
   machine_type = "n2-standard-8"
-  tags         = ["ome-${local.suffix}"]
+  tags         = ["ome-${local.rid}"]
 
   boot_disk {
     initialize_params {
@@ -32,7 +23,7 @@ resource "google_compute_instance" "ome" {
 
 # allow RTMP and LL-HLS (http on 3333) connections into the VM
 resource "google_compute_firewall" "ome" {
-  name    = "ome-${local.suffix}"
+  name    = "ome-${local.rid}"
   network = "default"
 
   allow {
@@ -42,15 +33,15 @@ resource "google_compute_firewall" "ome" {
 
   source_ranges = ["0.0.0.0/0"]
 
-  target_tags = ["ome-${local.suffix}"]
+  target_tags = ["ome-${local.rid}"]
 }
 
-# front the ome-llhls service with a fastly service
+# front the ome-llhls server with a fastly service
 resource "fastly_service_vcl" "llhls" {
   name = "llhls"
 
   domain {
-    name = "llhls-${local.suffix}.global.ssl.fastly.net"
+    name = "llhls-${local.rid}.global.ssl.fastly.net"
   }
 
   backend {

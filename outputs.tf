@@ -5,5 +5,5 @@ output "rtmp_url" {
 
 output "hls_js_player" {
   description = "hls.js demo player url"
-  value       = "https://hlsjs.video-dev.org/demo/?src=https://${fastly_service_vcl.llhls.name}-${local.suffix}.global.ssl.fastly.net/app/stream/llhls.m3u8"
+  value       = "https://hlsjs.video-dev.org/demo/?src=https://${fastly_service_vcl.llhls.name}-${local.rid}.global.ssl.fastly.net/app/stream/llhls.m3u8"
 }
